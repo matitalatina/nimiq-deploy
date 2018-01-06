@@ -1,0 +1,5 @@
+---
+domain: <DOMAIN>
+certbot_certs:
+  - domains:
+    - "{{domain}}"

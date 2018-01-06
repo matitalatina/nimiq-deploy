@@ -23,13 +23,16 @@
     - forever
   become: yes
 
+- name: Create folder for miner
+  file: path={{miner.folder}} state=directory
+
 - name: Git checkout miner
   git:
     repo: "{{miner.repo}}"
     dest: "{{miner.folder}}"
     version: "{{miner.branch}}"
 
-- name: Install packages for the miner
+- name: Install packages for miner
   npm:
     path: "{{item}}"
   with_items:

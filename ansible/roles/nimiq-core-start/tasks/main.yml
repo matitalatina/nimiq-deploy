@@ -1,10 +1,26 @@
 ---
-- name: "Check list of Node.js apps running."
+- name: Check list of Node.js apps running.
   command: forever list
   register: forever_list
   changed_when: false
 
-- name: "Start example miner app."
-  command: forever start {{miner.executable_path}} --host {{domain}} --port {{miner.port}} --key /etc/letsencrypt/live/{{domain}}/privkey.pem --cert /etc/letsencrypt/live/{{domain}}/fullchain.pem --statistics={{miner.statistics}} --miner={{miner.threads}} --wallet-seed={{miner.wallet_seed}}
-  when: "forever_list.stdout.find(miner.executable_path) == -1"
+- name: Create folder for logs
+  file: path={{miner.log_folder}} state=directory
+
+- name: Prepare command to start
+  set_fact:
+    start_command: forever start -a -l {{miner.log_folder}}/miner.log.log -o {{miner.log_folder}}/miner.out.log -e {{miner.log_folder}}/miner.err.log {{miner.executable_path}} --host {{domain}} --port {{miner.port}} --key /etc/letsencrypt/live/{{domain}}/privkey.pem --cert /etc/letsencrypt/live/{{domain}}/fullchain.pem --statistics={{miner.statistics}} --miner={{miner.threads}} --wallet-seed={{miner.wallet_seed}}
+
+- name: Start example miner app.
+  command: "{{start_command}}"
+  when: forever_list.stdout.find(miner.executable_path) == -1
   become: yes
+
+- name: Start miner at boot
+  lineinfile:
+    path: /etc/rc.local
+    regexp: ^{{start_command}}
+    line: "{{start_command}}"
+    insertbefore: ^exit 0
+  become: yes
+

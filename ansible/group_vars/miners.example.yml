@@ -1,10 +1,19 @@
 ---
-ssh_user: pi
+ssh_user: <SSH_USER>
 nvm_version: v0.33.8
-node_version: "8.x"
+nodejs_version: "8.x"
+nodejs_install_npm_user: root
+miner_folder: <MINER_FOLDER>
 miner:
- threads: 4
- port: 8585
- branch: master
- folder: <MINER_FOLDER>
-wallet_seed: <WALLET_SEED>
+  threads: 4
+  port: 8585
+  statistics: 10
+  branch: master
+  folder: "{{miner_folder}}"
+  executable_path: "{{miner_folder}}/clients/nodejs/index.js"
+  repo: https://github.com/nimiq-network/core
+  wallet_seed: <WALLET_SEED>
+  log_folder: /mnt/usb/logs
+certbot_create_if_missing: yes
+certbot_admin_email: <EMAIL>
+certbot_create_standalone_stop_services: []
