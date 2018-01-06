@@ -18,6 +18,10 @@
   - Do the same thing in `host_vars`, but replace `HOST` with the name of your host that you placed inside `hosts` file in the root.
   - Start with `ansible-playbook -i hosts miners.yml`
 
+  ### Further improvements
+
+  - Start only one forever task. Now it doesn't recognize if there is already one started.
+
 ## Naive
 
 Inside that folder, there's a simple script that I used to test AWS machines with nimiq miner.
