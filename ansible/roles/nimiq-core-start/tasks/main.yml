@@ -1,0 +1,10 @@
+---
+- name: "Check list of Node.js apps running."
+  command: forever list
+  register: forever_list
+  changed_when: false
+
+- name: "Start example miner app."
+  command: forever start {{miner.executable_path}} --host {{domain}} --port {{miner.port}} --key /etc/letsencrypt/live/{{domain}}/privkey.pem --cert /etc/letsencrypt/live/{{domain}}/fullchain.pem --statistics={{miner.statistics}} --miner={{miner.threads}} --wallet-seed={{miner.wallet_seed}}
+  when: "forever_list.stdout.find(miner.executable_path) == -1"
+  become: yes

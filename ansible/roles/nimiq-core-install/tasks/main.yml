@@ -1,0 +1,42 @@
+---
+- name: Install essential dependencies
+  apt: name={{item}} state=present
+  with_items:
+    - git
+    - build-essential
+    - make
+    - gcc
+    - python2.7
+  become: yes
+
+- name: Install optional dependencies
+  apt: name={{item}} state=present
+  with_items:
+    - htop
+    - vim
+  become: yes
+
+- name: Install node modules
+  npm: name={{item}} global=yes
+  with_items:
+    - gulp
+    - forever
+  become: yes
+
+- name: Git checkout miner
+  git:
+    repo: "{{miner.repo}}"
+    dest: "{{miner.folder}}"
+    version: "{{miner.branch}}"
+
+- name: Install packages for the miner
+  npm:
+    path: "{{item}}"
+  with_items:
+    - "{{miner.folder}}"
+    - "{{miner.folder}}/clients/nodejs/"
+
+- name: Build miner
+  command: npm run build
+  args:
+    chdir: "{{miner.folder}}"
