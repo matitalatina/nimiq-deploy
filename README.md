@@ -9,6 +9,7 @@
 
   ### Ansible Orchestrator Requirements
 
+  - [Ansible](https://www.ansible.com/) of course.
   - `ansible-galaxy install leonidas.nvm` To install nodejs.
   - `ansible-galaxy install geerlingguy.certbot` To install certbot.
 
