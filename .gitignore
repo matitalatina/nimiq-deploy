@@ -1,4 +1,5 @@
 hosts
 pi2.yml
+pi22.yml
 miners.yml
 *.retry

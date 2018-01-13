@@ -24,7 +24,12 @@
   become: yes
 
 - name: Create folder for miner
-  file: path={{miner.folder}} state=directory
+  file:
+    path: "{{miner.folder}}"
+    state: directory
+    owner: "{{ansible_user_id}}"
+    group: "{{ansible_user_id}}"
+  become: yes
 
 - name: Git checkout miner
   git:
