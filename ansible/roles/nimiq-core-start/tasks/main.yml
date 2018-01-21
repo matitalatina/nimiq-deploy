@@ -5,7 +5,12 @@
   changed_when: false
 
 - name: Create folder for logs
-  file: path={{miner.log_folder}} state=directory
+  file:
+    path: "{{miner.log_folder}}"
+    state: directory
+    owner: "{{ansible_user_id}}"
+    group: "{{ansible_user_id}}"
+  become: yes
 
 - name: Prepare command to start
   set_fact:
