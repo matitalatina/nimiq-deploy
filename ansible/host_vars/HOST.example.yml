@@ -1,5 +1,6 @@
 ---
 domain: <DOMAIN>
+miner_port: <MINER_PORT>
 certbot_certs:
   - domains:
     - "{{domain}}"

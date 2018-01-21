@@ -4,9 +4,10 @@ nvm_version: v0.33.8
 nodejs_version: "8.x"
 nodejs_install_npm_user: root
 miner_folder: <MINER_FOLDER>
+miner_port: 8585
 miner:
   threads: 4
-  port: 8585
+  port: "{{miner_port}}"
   statistics: 10
   branch: master
   folder: "{{miner_folder}}"
