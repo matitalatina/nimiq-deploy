@@ -13,7 +13,7 @@ miner:
   folder: "{{miner_folder}}"
   executable_path: "{{miner_folder}}/clients/nodejs/index.js"
   repo: https://github.com/nimiq-network/core
-  wallet_seed: <WALLET_SEED>
+  wallet_address: <WALLET_ADDRESS>
   log_folder: /mnt/usb/logs
 certbot_create_if_missing: yes
 certbot_admin_email: <EMAIL>

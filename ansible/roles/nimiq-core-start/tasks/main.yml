@@ -14,7 +14,7 @@
 
 - name: Prepare command to start
   set_fact:
-    start_command: forever start -a -l {{miner.log_folder}}/miner.log.log -o {{miner.log_folder}}/miner.out.log -e {{miner.log_folder}}/miner.err.log {{miner.executable_path}} --host {{domain}} --port {{miner.port}} --key /etc/letsencrypt/live/{{domain}}/privkey.pem --cert /etc/letsencrypt/live/{{domain}}/fullchain.pem --statistics={{miner.statistics}} --miner={{miner.threads}} --wallet-seed={{miner.wallet_seed}}
+    start_command: forever start -a -l {{miner.log_folder}}/miner.log.log -o {{miner.log_folder}}/miner.out.log -e {{miner.log_folder}}/miner.err.log {{miner.executable_path}} --host {{domain}} --port {{miner.port}} --key /etc/letsencrypt/live/{{domain}}/privkey.pem --cert /etc/letsencrypt/live/{{domain}}/fullchain.pem --statistics={{miner.statistics}} --miner={{miner.threads}} --wallet-address={{miner.wallet_address}}
 
 - name: Start example miner app.
   command: "{{start_command}}"
